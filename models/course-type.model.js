@@ -13,7 +13,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        about: {
+        teacher: {
             type: Sequelize.STRING,
             allowNull: false
         }
