@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    return sequelize.define("all_courses", {
+    const AllCourses = sequelize.define("all_courses", {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -17,4 +17,5 @@ module.exports = (sequelize, Sequelize) => {
 {
         timestamps: true
 })
+    return AllCourses
 }

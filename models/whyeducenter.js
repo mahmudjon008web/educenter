@@ -1,7 +1,7 @@
 module.exports = (sequelize, Sequelize)=>{
-    const Whytimeschool = sequelize.define("whytimeschool", {
+    const Whyeducenter = sequelize.define("whyeducenter", {
         id: {
-            id: Sequelize.INTEGER,
+            type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
@@ -21,5 +21,5 @@ module.exports = (sequelize, Sequelize)=>{
     {
         timestamps: true
     })
-    return Whytimeschool;
+    return Whyeducenter;
 }

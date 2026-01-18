@@ -45,7 +45,6 @@ const swaggerOptions = {
       },
     ],
   },
-
   // ❗ controller va route fayllarni ko‘rsatamiz
   apis: ['./routes/*.js', './controllers/*.js'],
 }
@@ -58,7 +57,7 @@ app.use("/educenter/v1/api", require("./routes"))
 app.get("/", (req, res)=>{
     try {
         res.status(200).json({
-            message: "Bu (timeschool) uchun API"
+            message: "Bu (educenter) uchun API"
         })
     } catch (error) {
         ServerError(res, error)
