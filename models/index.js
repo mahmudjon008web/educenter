@@ -18,5 +18,6 @@ db.OurCourses = require("../models/ourcourses.model")(sequelize, Sequelize)
 db.MainCourses = require("./main.model")(sequelize, Sequelize)
 db.Home = require("../models/home.model")(sequelize, Sequelize)
 db.whyWe = require("../models/whywe.model")(sequelize, Sequelize)
+db.AllCourses = require("../models/allcourses.model")(sequelize, Sequelize)
 
 module.exports = db
