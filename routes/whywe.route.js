@@ -1,24 +1,20 @@
-const router = require("express").Router()
-const { getHero, postHero, updateHero } = require("../controllers/hero/hero.controller")
+const { getWhywe, postWhywe, updateWhywe } = require("../controllers/whywe/whywe.controller")
 const { protect } = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
 
+const router = require("express").Router()
+
 /**
  * @swagger
- * /educenter/v1/api/hero:
+ * /educenter/v1/api/whywe:
  *   get:
- *     summary: Hero ma’lumotini ID bo‘yicha olish
- *     tags: [Hero]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         example: 1
+ *     summary: WhyWe ma’lumotlarini olish (auth orqali)
+ *     tags: [WhyWe]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Hero ma’lumoti
+ *         description: WhyWe ro‘yxati
  *         content:
  *           application/json:
  *             schema:
@@ -31,25 +27,27 @@ const upload = require("../utils/fileUpload")
  *                     example: 1
  *                   title:
  *                     type: string
- *                     example: "Hero sarlavha"
- *                   text:
+ *                     example: "Nega biz?"
+ *                   about:
  *                     type: string
- *                     example: "Hero matni"
- *                   imageUrl:
+ *                     example: "Bizning afzalliklarimiz haqida"
+ *                   imgUrl:
  *                     type: string
- *                     example: "http://localhost:4500/uploads/image.jpg"
- *       404:
- *         description: Ma’lumot topilmadi
+ *                     example: "http://localhost:4500/uploads/whywe.jpg"
+ *       401:
+ *         description: Avtorizatsiya talab qilinadi
  *       500:
  *         description: Server xatosi
  */
-router.get("/" , protect ,getHero)
+router.get("/", protect, getWhywe)
 /**
  * @swagger
- * /educenter/v1/api/hero/post:
+ * /educenter/v1/api/whywe/post:
  *   post:
- *     summary: Hero bo‘limiga yangi ma’lumot qo‘shish
- *     tags: [Hero]
+ *     summary: WhyWe bo‘limiga yangi ma’lumot qo‘shish
+ *     tags: [WhyWe]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -58,21 +56,21 @@ router.get("/" , protect ,getHero)
  *             type: object
  *             required:
  *               - title
- *               - text
- *               - imageUrl
+ *               - about
+ *               - imgUrl
  *             properties:
  *               title:
  *                 type: string
- *                 example: "Asosiy sarlavha"
- *               text:
+ *                 example: "Bizning ustunligimiz"
+ *               about:
  *                 type: string
- *                 example: "Hero bo‘limi uchun matn"
- *               imageUrl:
+ *                 example: "Tajribali ustozlar va sifatli ta’lim"
+ *               imgUrl:
  *                 type: string
  *                 format: binary
  *     responses:
  *       201:
- *         description: Ma’lumot muvaffaqiyatli qo‘shildi
+ *         description: Ma’lumotlar muvaffaqiyatli qo‘shildi
  *         content:
  *           application/json:
  *             schema:
@@ -80,29 +78,25 @@ router.get("/" , protect ,getHero)
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Ma'lumot qo'shildi"
- *                 newHero:
+ *                   example: "Ma'lumotlar qo'shildi"
+ *                 newWhywe:
  *                   type: object
  *       400:
  *         description: Noto‘g‘ri ma’lumot
+ *       401:
+ *         description: Avtorizatsiya talab qilinadi
  *       500:
  *         description: Server xatosi
  */
-router.post("/post", upload.single("imageUrl"), protect, postHero)
-
+router.post("/post", protect, upload.single("imgUrl"), postWhywe)
 /**
  * @swagger
- * /educenter/v1/api/hero/update/{id}:
+ * /educenter/v1/api/whywe/update:
  *   patch:
- *     summary: Hero ma’lumotini yangilash
- *     tags: [Hero]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *         example: 1
+ *     summary: WhyWe ma’lumotlarini yangilash (auth orqali)
+ *     tags: [WhyWe]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -111,20 +105,21 @@ router.post("/post", upload.single("imageUrl"), protect, postHero)
  *             type: object
  *             required:
  *               - title
- *               - text
- *               - imageUrl
+ *               - about
+ *               - imgUrl
  *             properties:
  *               title:
  *                 type: string
  *                 example: "Yangilangan sarlavha"
- *               text:
+ *               about:
  *                 type: string
- *                 example: "Yangilangan matn"
- *               imageUrl:
- *                 type: file
+ *                 example: "Yangilangan tavsif"
+ *               imgUrl:
+ *                 type: string
+ *                 format: binary
  *     responses:
- *       200:
- *         description: Muvaffaqiyatli yangilandi
+ *       201:
+ *         description: Ma’lumotlar yangilandi
  *         content:
  *           application/json:
  *             schema:
@@ -132,14 +127,14 @@ router.post("/post", upload.single("imageUrl"), protect, postHero)
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Muvaffaqiyatli yangilanish"
+ *                   example: "Ma'lumotlar yangilandi"
  *       400:
  *         description: Barcha zonalarni to‘ldiring
- *       404:
- *         description: Hero topilmadi
+ *       401:
+ *         description: Avtorizatsiya talab qilinadi
  *       500:
  *         description: Server xatosi
  */
-router.patch("/update", protect, upload.single("imageUrl") ,updateHero)
+router.patch("/update", protect, upload.single("imgUrl"), updateWhywe)
 
 module.exports = router

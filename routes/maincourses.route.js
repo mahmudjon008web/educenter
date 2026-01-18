@@ -1,4 +1,4 @@
-const { postMaincourses, getMaincourses, updateMaincourses } = require("../controllers/allcourses/allcourses.controller")
+const { postMaincourses, getMaincourses, updateMaincourses } = require("../controllers/maincourses/maincourses.controller")
 const { protect } = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
 
@@ -10,7 +10,7 @@ const router = require("express").Router()
  * /educenter/v1/api/maincourses:
  *   get:
  *     summary: AllCourses ma'lumotlarini olish
- *     tags: [AllCourses]
+ *     tags: [MainCourses]
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -38,7 +38,7 @@ router.get("/", protect, getMaincourses)
  * /educenter/v1/api/maincourses/post:
  *   post:
  *     summary: Yangi kurs qo'shish
- *     tags: [AllCourses]
+ *     tags: [MainCourses]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -71,7 +71,7 @@ router.post("/post", protect, upload.single("imgUrl"), postMaincourses)
  * /educenter/v1/api/maincourses/update:
  *   patch:
  *     summary: Kurs ma'lumotlarini yangilash
- *     tags: [AllCourses]
+ *     tags: [MainCourses]
  *     security:
  *       - bearerAuth: []
  *     requestBody:

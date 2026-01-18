@@ -1,42 +1,42 @@
 const { ServerError, ValidError } = require("../../service/validation")
 const db = require("../../models")
-const MainCourses = db.MainCourses
+const whyWe = db.whyWe
 
-const getMaincourses = async (req, res)=>{
+const getWhywe = async (req, res)=>{
     try {
         const user = await req.user
-        const allcourses = await MainCourses.findAll({where: {id: user.id}})
-        res.status(200).json(allcourses) 
+        const whywe = await whyWe.findAll({where: {id: user.id}})
+        res.status(200).json(whywe)
     } catch (error) {
         ServerError(res, error)
     }
 }
 
-const postMaincourses = async (req, res)=>{
+const postWhywe = async (req, res)=>{
     try {
-        const {name_course, about} = req.body
+        const {title, about} = req.body
         const imgUrl = `${req.protocol}://${req.host}/uploads/${req.file.filename}`
-        const newAllcourses = await MainCourses.create({name_course, about, imgUrl})
+        const newWhywe = await whyWe.create({title, about, imgUrl})
         res.status(201).json({
             message: "Ma'lumotlar qo'shildi",
-            newAllcourses
+            newWhywe
         })
     } catch (error) {
         ServerError(res, error)
     }
 }
 
-const updateMaincourses = async (req, res)=>{
+const updateWhywe = async (req, res)=>{
     try {
         const user = await req.user
-        const {name_course, about} = req.body
+        const {title, about} = req.body
         const imgUrl = `${req.protocol}://${req.host}/uploads/${req.file.filename}`
-        if(!name_course||!about||!imgUrl){
+        if(!title||!about||!imgUrl){
             ValidError(res, 300, "Barcha zonalarni to'ldiring!")
         }
-        await MainCourses.update({name_course, about, imgUrl}, {where: {id: user.id}})
+        await whyWe.update({title, about, imgUrl}, {where: {id: user.id}})
         res.status(201).json({
-            message: "Ma'lumotlar yangilandi!"
+            message: "Ma'lumotlar yangilandi"
         })
     } catch (error) {
         ServerError(res, error)
@@ -44,7 +44,7 @@ const updateMaincourses = async (req, res)=>{
 }
 
 module.exports = {
-    getMaincourses,
-    postMaincourses,
-    updateMaincourses
+    getWhywe,
+    postWhywe,
+    updateWhywe
 }

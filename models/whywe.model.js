@@ -5,13 +5,17 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true,
         },
-        name_we: {
+        title: {
             type: Sequelize.STRING,
             allowNull: false
         },
         about: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING(500),
             allowNull: false 
+        },
+        imgUrl: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     },{
         timestamps: true

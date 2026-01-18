@@ -1,15 +1,23 @@
 module.exports = (sequelize, Sequelize)=>{
-    const AllCourses = sequelize.define("allcourses", {
+    const Connection = sequelize.define("connection", {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        imgUrl: {
+        name: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        course_name: {
+        surname: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        phone: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        adress: {
             type: Sequelize.STRING,
             allowNull: false
         }
@@ -17,5 +25,5 @@ module.exports = (sequelize, Sequelize)=>{
     {
         timestamps: true
     })
-    return AllCourses
+    return Connection
 }
