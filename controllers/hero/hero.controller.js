@@ -41,7 +41,7 @@ const updateHero = async (req, res)=>{
         await Hero.update({title, text, imageUrl}, 
             {where: {id: user.id}}
         )
-        res.status(200).json({
+        res.status(201).json({
             message: "Muvaffaqiyatli yangilanish"
         })
     } catch (error) {

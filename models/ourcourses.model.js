@@ -3,9 +3,9 @@ module.exports = (sequelize, Sequelize) => {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
-            primaryKey: true,
+            primaryKey: true
         },
-        name_course: {
+        title: {
             type: Sequelize.STRING,
             allowNull: false
         },
@@ -13,6 +13,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         }
+    },
+    {
+        timestamps: true
     })
     return OurCourses;
 }

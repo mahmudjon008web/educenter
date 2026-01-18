@@ -38,6 +38,9 @@ const updateWhyeducenter = async (req, res)=>{
         await Whyeducenter.update({title, text, imgUrl}, 
             {where: {id: user.id}}
         )
+        res.status(201).json({
+            message: "Ma'lumotlar yangilandi!"
+        })
     } catch (error) {
         ServerError(res, error)
     }

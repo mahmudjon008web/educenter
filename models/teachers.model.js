@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize)=>{
             allowNull: false
         },
         about: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING(1000),
             allowNull: false
         },
         experience: {
@@ -26,6 +26,10 @@ module.exports = (sequelize, Sequelize)=>{
             allowNull: false
         },
         students: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        goodStudents: {
             type: Sequelize.INTEGER,
             allowNull: false
         }

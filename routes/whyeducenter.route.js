@@ -42,7 +42,7 @@ const upload = require("../utils/fileUpload")
 router.get("/", protect, getWhyeducenter)
 /**
  * @swagger
- * /educenter/v1/api/whyeducenter:
+ * /educenter/v1/api/whyeducenter/post:
  *   post:
  *     summary: Why Educenter bo‘limiga yangi ma’lumot qo‘shish
  *     tags: [WhyEducenter]
@@ -57,7 +57,7 @@ router.get("/", protect, getWhyeducenter)
  *             required:
  *               - title
  *               - text
- *               - img
+ *               - imgUrl
  *             properties:
  *               title:
  *                 type: string
@@ -65,8 +65,8 @@ router.get("/", protect, getWhyeducenter)
  *               text:
  *                 type: string
  *                 example: "Bizda tajribali ustozlar dars beradi"
- *               img:
- *                 type: string
+ *               imgUrl:
+ *                 type: file
  *                 format: binary
  *     responses:
  *       200:
@@ -89,7 +89,7 @@ router.get("/", protect, getWhyeducenter)
 router.post("/post", protect, upload.single("imgUrl"), postWhyeducenter)
 /**
  * @swagger
- * /educenter/v1/api/whyeducenter:
+ * /educenter/v1/api/whyeducenter/update:
  *   patch:
  *     summary: Why Educenter ma’lumotlarini yangilash (token orqali)
  *     tags: [WhyEducenter]
@@ -104,7 +104,7 @@ router.post("/post", protect, upload.single("imgUrl"), postWhyeducenter)
  *             required:
  *               - title
  *               - text
- *               - img
+ *               - imgUrl
  *             properties:
  *               title:
  *                 type: string
@@ -112,8 +112,8 @@ router.post("/post", protect, upload.single("imgUrl"), postWhyeducenter)
  *               text:
  *                 type: string
  *                 example: "Yangilangan matn"
- *               img:
- *                 type: string
+ *               imgUrl:
+ *                 type: file
  *                 format: binary
  *     responses:
  *       200:
