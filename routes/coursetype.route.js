@@ -59,7 +59,7 @@ router.get("/", protect, getCoursetype)
  *                 type: string
  *                 example: "Jane Smith"
  *               imgUrl:
- *                 type: string
+ *                 type: file
  *                 format: binary
  *     responses:
  *       201:
@@ -104,7 +104,7 @@ router.post("/post", protect, upload.single("imgUrl"), postCourseType)
  *                 type: string
  *                 example: "Updated Teacher Name"
  *               imgUrl:
- *                 type: string
+ *                 type: file
  *                 format: binary
  *     responses:
  *       201:

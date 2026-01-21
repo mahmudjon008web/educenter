@@ -1,20 +1,19 @@
 const router = require("express").Router()
-const { getWhyeducenter, postWhyeducenter, updateWhyeducenter } = require("../controllers/whytimeschool/whytimeschool.controller")
-const { protect } = require("../middleware/protected")
+const { getAllcourses, postAllcourses, updateAllcourses } = require("../controllers/courses/courses.controller")
+const {protect} = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
-
 
 /**
  * @swagger
- * /educenter/v1/api/whyeducenter:
+ * /educenter/v1/api/allcourses:
  *   get:
- *     summary: Why Educenter ma’lumotlarini olish (token orqali)
- *     tags: [WhyEducenter]
+ *     summary: AllCourses ro‘yxatini olish (auth orqali)
+ *     tags: [AllCourses]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: Ma’lumotlar muvaffaqiyatli olindi
+ *         description: Kurslar ro‘yxati
  *         content:
  *           application/json:
  *             schema:
@@ -25,27 +24,24 @@ const upload = require("../utils/fileUpload")
  *                   id:
  *                     type: integer
  *                     example: 1
- *                   title:
+ *                   course_name:
  *                     type: string
- *                     example: "Nima uchun Educenter?"
- *                   text:
- *                     type: string
- *                     example: "Bizning afzalliklarimiz..."
+ *                     example: "Frontend Development"
  *                   imgUrl:
  *                     type: string
- *                     example: "http://localhost:4500/uploads/image.jpg"
+ *                     example: "http://localhost:4500/uploads/course.jpg"
  *       401:
- *         description: Token mavjud emas yoki noto‘g‘ri
+ *         description: Avtorizatsiya talab qilinadi
  *       500:
  *         description: Server xatosi
  */
-router.get("/", protect, getWhyeducenter)
+router.get("/", protect, getAllcourses)
 /**
  * @swagger
- * /educenter/v1/api/whyeducenter/post:
+ * /educenter/v1/api/allcourses/post:
  *   post:
- *     summary: Why Educenter bo‘limiga yangi ma’lumot qo‘shish
- *     tags: [WhyEducenter]
+ *     summary: Yangi kurs qo‘shish
+ *     tags: [AllCourses]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -55,22 +51,18 @@ router.get("/", protect, getWhyeducenter)
  *           schema:
  *             type: object
  *             required:
- *               - title
- *               - text
+ *               - course_name
  *               - imgUrl
  *             properties:
- *               title:
+ *               course_name:
  *                 type: string
- *                 example: "Professional ustozlar"
- *               text:
- *                 type: string
- *                 example: "Bizda tajribali ustozlar dars beradi"
+ *                 example: "Backend Development"
  *               imgUrl:
  *                 type: file
  *                 format: binary
  *     responses:
- *       200:
- *         description: Muvaffaqiyatli qo‘shildi
+ *       201:
+ *         description: Ma’lumotlar muvaffaqiyatli qo‘shildi
  *         content:
  *           application/json:
  *             schema:
@@ -78,21 +70,23 @@ router.get("/", protect, getWhyeducenter)
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Muvaffaqiyatli qo'shildi"
+ *                   example: "Ma'lumotlar qo'shildi"
+ *                 newallcourses:
+ *                   type: object
  *       400:
  *         description: Noto‘g‘ri ma’lumot
  *       401:
- *         description: Token yo‘q yoki noto‘g‘ri
+ *         description: Avtorizatsiya talab qilinadi
  *       500:
  *         description: Server xatosi
  */
-router.post("/post", protect, upload.single("imgUrl"), postWhyeducenter)
+router.post("/post", protect, upload.single("imgUrl"), postAllcourses)
 /**
  * @swagger
- * /educenter/v1/api/whyeducenter/update:
+ * /educenter/v1/api/allcourses/update:
  *   patch:
- *     summary: Why Educenter ma’lumotlarini yangilash (token orqali)
- *     tags: [WhyEducenter]
+ *     summary: Kurs ma’lumotlarini yangilash (auth orqali)
+ *     tags: [AllCourses]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -102,22 +96,18 @@ router.post("/post", protect, upload.single("imgUrl"), postWhyeducenter)
  *           schema:
  *             type: object
  *             required:
- *               - title
- *               - text
+ *               - course_name
  *               - imgUrl
  *             properties:
- *               title:
+ *               course_name:
  *                 type: string
- *                 example: "Yangilangan sarlavha"
- *               text:
- *                 type: string
- *                 example: "Yangilangan matn"
+ *                 example: "Updated Course Name"
  *               imgUrl:
  *                 type: file
  *                 format: binary
  *     responses:
- *       200:
- *         description: Muvaffaqiyatli yangilandi
+ *       201:
+ *         description: Ma’lumotlar yangilandi
  *         content:
  *           application/json:
  *             schema:
@@ -125,14 +115,14 @@ router.post("/post", protect, upload.single("imgUrl"), postWhyeducenter)
  *               properties:
  *                 message:
  *                   type: string
- *                   example: "Muvaffaqiyatli yangilandi"
+ *                   example: "Ma'lumotlar yangilandi"
  *       400:
  *         description: Barcha zonalarni to‘ldiring
  *       401:
- *         description: Token mavjud emas
+ *         description: Avtorizatsiya talab qilinadi
  *       500:
  *         description: Server xatosi
  */
-router.patch("/update", protect, upload.single("imgUrl") ,updateWhyeducenter)
+router.patch("/update", protect, upload.single("imgUrl"), updateAllcourses)
 
 module.exports = router

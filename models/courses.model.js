@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize)=>{
-    const Whyeducenter = sequelize.define("whyeducenter", {
+    const Courses = sequelize.define("courses", {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -7,19 +7,19 @@ module.exports = (sequelize, Sequelize)=>{
         },
         imgUrl: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
-        title: {
+        course_name: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
-        text: {
+        about: {
             type: Sequelize.STRING(500),
-            allowNull: false
+            allowNull: true
         }
     },
     {
         timestamps: true
     })
-    return Whyeducenter;
+    return Courses
 }

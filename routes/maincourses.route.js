@@ -59,7 +59,7 @@ router.get("/", protect, getMaincourses)
  *                 type: string
  *                 example: Ushbu kurs backend asoslarini o'rgatadi
  *               imgUrl:
- *                 type: string
+ *                 type: file
  *                 format: binary
  *     responses:
  *       201:
@@ -92,7 +92,7 @@ router.post("/post", protect, upload.single("imgUrl"), postMaincourses)
  *                 type: string
  *                 example: Frontend uchun React kursi
  *               imgUrl:
- *                 type: string
+ *                 type: file
  *                 format: binary
  *     responses:
  *       201:

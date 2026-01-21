@@ -7,31 +7,31 @@ module.exports = (sequelize, Sequelize)=>{
         },
         fullName: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         level: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         imgUrl: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         about: {
             type: Sequelize.STRING(1000),
-            allowNull: false
+            allowNull: true
         },
         experience: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         students: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         goodStudents: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            allowNull: true
         }
     },
     {

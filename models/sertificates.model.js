@@ -1,24 +1,25 @@
 module.exports = (sequelize, Sequelize)=>{
-    return Communication = sequelize.define("communication", {
+    const Sertificates = sequelize.define("certificates", {
         id: {
             type: Sequelize.INTEGER,
-            autoIncrement: true,
+            autoIncrement: true, 
             primaryKey: true
         },
-        title: {
+        name: {
             type: Sequelize.STRING,
-            allowNull: false
-        },
-        text: {
-            type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         imgUrl: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
+        },
+        about: {
+            type: Sequelize.STRING(500),
+            allowNull: true
         }
     },
     {
         timestamps: true
     })
+    return Sertificates
 }

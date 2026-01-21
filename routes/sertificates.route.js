@@ -1,4 +1,4 @@
-const { getWhywe, postWhywe, updateWhywe } = require("../controllers/whywe/whywe.controller")
+const { getSertificates, postSertificates, updateSertificates } = require("../controllers/sertificates/sertificates.controller")
 const { protect } = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
 
@@ -6,15 +6,15 @@ const router = require("express").Router()
 
 /**
  * @swagger
- * /educenter/v1/api/whywe:
+ * /educenter/v1/api/sertificates:
  *   get:
- *     summary: WhyWe ma’lumotlarini olish (auth orqali)
- *     tags: [WhyWe]
+ *     summary: Sertifikatlar ro‘yxatini olish (auth orqali)
+ *     tags: [Sertificates]
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: WhyWe ro‘yxati
+ *         description: Sertifikatlar ro‘yxati
  *         content:
  *           application/json:
  *             schema:
@@ -25,29 +25,27 @@ const router = require("express").Router()
  *                   id:
  *                     type: integer
  *                     example: 1
- *                   title:
+ *                   name:
  *                     type: string
- *                     example: "Nega biz?"
+ *                     example: "Frontend Certificate"
  *                   about:
  *                     type: string
- *                     example: "Bizning afzalliklarimiz haqida"
+ *                     example: "React va JavaScript kursi"
  *                   imgUrl:
  *                     type: string
- *                     example: "http://localhost:4500/uploads/whywe.jpg"
+ *                     example: "http://localhost:5000/uploads/cert.png"
  *       401:
  *         description: Avtorizatsiya talab qilinadi
  *       500:
  *         description: Server xatosi
  */
-router.get("/", protect, getWhywe)
+router.get("/", protect, getSertificates)
 /**
  * @swagger
- * /educenter/v1/api/whywe/post:
+ * /educenter/v1/api/sertificates/post:
  *   post:
- *     summary: WhyWe bo‘limiga yangi ma’lumot qo‘shish
- *     tags: [WhyWe]
- *     security:
- *       - bearerAuth: []
+ *     summary: Yangi sertifikat qo‘shish
+ *     tags: [Sertificates]
  *     requestBody:
  *       required: true
  *       content:
@@ -55,22 +53,22 @@ router.get("/", protect, getWhywe)
  *           schema:
  *             type: object
  *             required:
- *               - title
+ *               - name
  *               - about
  *               - imgUrl
  *             properties:
- *               title:
+ *               name:
  *                 type: string
- *                 example: "Bizning ustunligimiz"
+ *                 example: "Backend Certificate"
  *               about:
  *                 type: string
- *                 example: "Tajribali ustozlar va sifatli ta’lim"
+ *                 example: "Node.js va PostgreSQL"
  *               imgUrl:
- *                 type: string
+ *                 type: file
  *                 format: binary
  *     responses:
  *       201:
- *         description: Ma’lumotlar muvaffaqiyatli qo‘shildi
+ *         description: Sertifikat muvaffaqiyatli qo‘shildi
  *         content:
  *           application/json:
  *             schema:
@@ -79,22 +77,20 @@ router.get("/", protect, getWhywe)
  *                 message:
  *                   type: string
  *                   example: "Ma'lumotlar qo'shildi"
- *                 newWhywe:
+ *                 newsertificate:
  *                   type: object
  *       400:
  *         description: Noto‘g‘ri ma’lumot
- *       401:
- *         description: Avtorizatsiya talab qilinadi
  *       500:
  *         description: Server xatosi
  */
-router.post("/post", protect, upload.single("imgUrl"), postWhywe)
+router.post("/post", protect, upload.single("imgUrl"), postSertificates)
 /**
  * @swagger
- * /educenter/v1/api/whywe/update:
+ * /educenter/v1/api/sertificates:
  *   patch:
- *     summary: WhyWe ma’lumotlarini yangilash (auth orqali)
- *     tags: [WhyWe]
+ *     summary: Sertifikat ma’lumotlarini yangilash (auth orqali)
+ *     tags: [Sertificates]
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -104,18 +100,18 @@ router.post("/post", protect, upload.single("imgUrl"), postWhywe)
  *           schema:
  *             type: object
  *             required:
- *               - title
+ *               - name
  *               - about
  *               - imgUrl
  *             properties:
- *               title:
+ *               name:
  *                 type: string
- *                 example: "Yangilangan sarlavha"
+ *                 example: "Updated Certificate"
  *               about:
  *                 type: string
- *                 example: "Yangilangan tavsif"
+ *                 example: "Updated description"
  *               imgUrl:
- *                 type: string
+ *                 type: file
  *                 format: binary
  *     responses:
  *       201:
@@ -135,6 +131,6 @@ router.post("/post", protect, upload.single("imgUrl"), postWhywe)
  *       500:
  *         description: Server xatosi
  */
-router.patch("/update", protect, upload.single("imgUrl"), updateWhywe)
+router.patch("/update", protect, upload.single("imgUrl"), updateSertificates)
 
 module.exports = router

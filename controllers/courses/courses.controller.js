@@ -1,40 +1,40 @@
-const { ServerError, ValidError } = require("../../service/validation")
+const {ServerError, ValidError} = require("../../service/validation")
 const db = require("../../models")
-const whyWe = db.whyWe
+const Courses = db.Courses
 
-const getWhywe = async (req, res)=>{
+const getAllcourses = async (req, res)=>{
     try {
         const user = await req.user
-        const whywe = await whyWe.findAll({where: {id: user.id}})
-        res.status(200).json(whywe)
+        const allcourses = await Courses.findAll({where: {id: user.id}}) 
+        res.status(200).json(allcourses)
     } catch (error) {
         ServerError(res, error)
     }
 }
 
-const postWhywe = async (req, res)=>{
+const postAllcourses = async (req, res)=>{
     try {
-        const {title, about} = req.body
+        const {course_name} = req.body
         const imgUrl = `${req.protocol}://${req.host}/uploads/${req.file.filename}`
-        const newWhywe = await whyWe.create({title, about, imgUrl})
+        const newallcourses = await Courses.create({course_name, imgUrl})
         res.status(201).json({
             message: "Ma'lumotlar qo'shildi",
-            newWhywe
+            newallcourses
         })
     } catch (error) {
         ServerError(res, error)
     }
 }
 
-const updateWhywe = async (req, res)=>{
+const updateAllcourses = async (req, res)=>{
     try {
         const user = await req.user
-        const {title, about} = req.body
+        const {course_name} = req.body
         const imgUrl = `${req.protocol}://${req.host}/uploads/${req.file.filename}`
-        if(!title||!about||!imgUrl){
+        if(!course_name||!imgUrl){
             ValidError(res, 300, "Barcha zonalarni to'ldiring!")
         }
-        await whyWe.update({title, about, imgUrl}, {where: {id: user.id}})
+        await Courses.update({course_name, imgUrl}, {where: {id: user.id}})
         res.status(201).json({
             message: "Ma'lumotlar yangilandi"
         })
@@ -44,7 +44,7 @@ const updateWhywe = async (req, res)=>{
 }
 
 module.exports = {
-    getWhywe,
-    postWhywe,
-    updateWhywe
+    getAllcourses,
+    postAllcourses,
+    updateAllcourses
 }

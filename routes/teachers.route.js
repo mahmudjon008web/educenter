@@ -88,7 +88,7 @@ router.get("/", protect, getTeachers)
  *                 type: integer
  *                 example: 200
  *               imgUrl:
- *                 type: string
+ *                 type: file
  *                 format: binary
  *     responses:
  *       201:
