@@ -76,7 +76,7 @@ const start = async ()=>{
     await db.sequelize.sync({force: false})
     await registerAdmin()
     app.listen(PORT, ()=>{
-        console.log(`Server is running on: http://localhost:${PORT}`.bgBlue);
+        console.log(`Server is running on: https://localhost:${PORT}`.bgBlue);
     })
 }
 start()
