@@ -16,6 +16,7 @@ require("colors")
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static(path.join(__dirname, "public")))
+app.set("trust proxy", true)
 // ================== SWAGGER CONFIG ==================
 const swaggerOptions = {
   definition: {
