@@ -5,7 +5,7 @@ const Connection = db.Connection
 const getConnection = async (req, res)=>{
     try {
         const user = await req.user
-        const connection = await Connection.findAll({where: {id: user.id}})
+        const connection = await Connection.findAll()
         res.status(200).json(connection) 
     } catch (error) {
         ServerError(res, error)

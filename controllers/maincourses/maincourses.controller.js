@@ -5,7 +5,7 @@ const Courses = db.Courses
 const getMaincourses = async (req, res)=>{
     try {
         const user = await req.user
-        const allcourses = await Courses.findAll({where: {id: user.id}})
+        const allcourses = await Courses.findAll()
         res.status(200).json(allcourses) 
     } catch (error) {
         ServerError(res, error)

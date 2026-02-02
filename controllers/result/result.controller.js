@@ -5,7 +5,7 @@ const Result = db.Result
 const getResult = async (req, res)=>{
     try {
         const user = await req.user
-        const result = await Result.findAll({where: {id: user.id}})
+        const result = await Result.findAll()
         res.status(200).json(result)
     } catch (error) {
         ServerError(res, error)

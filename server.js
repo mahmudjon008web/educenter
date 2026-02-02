@@ -3,6 +3,7 @@ require("dotenv").config()
 const { ServerError } = require("./service/validation")
 const path = require("path")
 const cors = require("cors")
+const app = express()
 app.use(cors({
     origin: "*",
     credentials: false
@@ -11,7 +12,6 @@ const swaggerUi = require('swagger-ui-express')
 const swaggerJsdoc = require('swagger-jsdoc')
 const db = require("./models")
 const { registerAdmin } = require("./controllers/admin/admin.controller")
-const app = express()
 require("colors")
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))

@@ -5,7 +5,7 @@ const Sertificates = db.Sertificates
 const getSertificates = async (req, res)=>{
     try {
         const user = await req.user
-        const sertificates = await Sertificates.findAll({where: {id: user.id}})
+        const sertificates = await Sertificates.findAll()
         res.status(200).json(sertificates)
     } catch (error) {
         ServerError(res, error)

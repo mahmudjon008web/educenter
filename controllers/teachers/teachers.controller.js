@@ -5,7 +5,7 @@ const Teachers = db.Teachers
 const getTeachers = async (req, res)=>{
     try {
         const user = await req.user
-        const teachers = await Teachers.findAll({where: {id: user.id}}) 
+        const teachers = await Teachers.findAll() 
         res.status(200).json(teachers)
     } catch (error) {
         ServerError(res, error)
