@@ -74,7 +74,7 @@ app.use((req, res)=>{
 
 const PORT = process.env.PORT || 4500
 const start = async ()=>{
-    await db.sequelize.sync({force: true})
+    await db.sequelize.sync({force: false})
     await registerAdmin()
     app.listen(PORT, ()=>{
         console.log(`Server is running on: https://localhost:${PORT}`.bgBlue);
