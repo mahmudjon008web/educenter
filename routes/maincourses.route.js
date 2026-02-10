@@ -1,4 +1,4 @@
-const { postMaincourses, getMaincourses, updateMaincourses } = require("../controllers/maincourses/maincourses.controller")
+const { postMaincourses, getMaincourses, updateMaincourses, deleteMainCourses } = require("../controllers/maincourses/maincourses.controller")
 const { protect } = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
 
@@ -99,5 +99,7 @@ router.post("/post", protect, upload.single("imgUrl"), postMaincourses)
  *         description: Ma'lumotlar yangilandi
  */
 router.patch("/update", protect, upload.single("imgUrl"), updateMaincourses)
+
+router.delete("/delete/:id", protect, deleteMainCourses)
 
 module.exports = router

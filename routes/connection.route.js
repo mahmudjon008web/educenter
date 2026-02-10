@@ -1,4 +1,4 @@
-const { getConnection, postConnection, updateConnection } = require("../controllers/connection/connection.controller")
+const { getConnection, postConnection, updateConnection, deleteConnection } = require("../controllers/connection/connection.controller")
 const { protect } = require("../middleware/protected")
 
 const router = require("express").Router()
@@ -142,5 +142,7 @@ router.post("/post", protect, postConnection)
  *         description: Server xatosi
  */
 router.patch("/update", protect, updateConnection)
+
+router.delete("/delete/:id", protect, deleteConnection)
 
 module.exports = router

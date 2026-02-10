@@ -1,4 +1,4 @@
-const { getCoursetype, postCourseType, updateCoursetype } = require("../controllers/coursetype/coursetype.controller")
+const { getCoursetype, postCourseType, updateCoursetype, deleteCoursetype } = require("../controllers/coursetype/coursetype.controller")
 const { protect } = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
 
@@ -125,5 +125,7 @@ router.post("/post", protect, upload.single("imgUrl"), postCourseType)
  *         description: Server xatosi
  */
 router.patch("/update", protect, upload.single("imgUrl"), updateCoursetype)
+
+router.delete("/delete/:id", protect, deleteCoursetype)
 
 module.exports = router

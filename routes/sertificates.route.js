@@ -1,4 +1,4 @@
-const { getSertificates, postSertificates, updateSertificates } = require("../controllers/sertificates/sertificates.controller")
+const { getSertificates, postSertificates, updateSertificates, deleteSertificate } = require("../controllers/sertificates/sertificates.controller")
 const { protect } = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
 
@@ -132,5 +132,7 @@ router.post("/post", protect, upload.single("imgUrl"), postSertificates)
  *         description: Server xatosi
  */
 router.patch("/update", protect, upload.single("imgUrl"), updateSertificates)
+
+router.delete("/delete/:id", protect, deleteSertificate)
 
 module.exports = router

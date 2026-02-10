@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const { login, logout } = require("../controllers/admin/admin.controller")
+const { login, logout, deleteAdmin } = require("../controllers/admin/admin.controller")
 const { protect } = require("../middleware/protected")
 /**
  * @swagger
@@ -70,5 +70,7 @@ router.post("/login", login)
  *         description: Server xatosi
  */
 router.post("/logout", protect, logout)
+
+router.delete("/delete/:id", protect, deleteAdmin)
 
 module.exports = router

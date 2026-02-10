@@ -41,8 +41,27 @@ const updateConnection = async (req, res)=>{
     }
 }
 
+
+const deleteConnection = async (req, res)=>{
+    try {
+        const {id} = req.params
+        const existConnection = await Connection.findOne({where: {id}})
+        if(!existConnection){
+            ValidError(res, 300, "Ma'lumot topilmadi!")
+        }
+        await Connection.destroy({where: {id: existConnection.id}})
+        res.status(201).json({
+            message: "Muvaffaqiyatli o'chirildi"
+        })
+    } catch (error) {
+        ServerError(res, error)
+    }
+}
+
+
 module.exports = {
     getConnection,
     postConnection,
-    updateConnection
+    updateConnection,
+    deleteConnection
 }

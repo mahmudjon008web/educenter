@@ -44,8 +44,25 @@ const updateCoursetype = async (req, res)=>{
     }
 }
 
+const deleteCoursetype = async (req, res)=>{
+    try {
+        const {id} = req.params
+        const existCourseType = await Teachers.findOne({where: {id}})
+        if(!existCourseType){
+            ValidError(res, 300, "Ma'lumot topilmadi")
+        }
+        await Teachers.destroy({where: {id: existCourseType.id}})
+        res.status(201).json({
+            message: "Muvaffaqiyatli o'chirildi"
+        })
+    } catch (error) {
+        ServerError(res, error)
+    }
+}
+
 module.exports = {
     getCoursetype,
     postCourseType,
-    updateCoursetype
+    updateCoursetype,
+    deleteCoursetype
 }

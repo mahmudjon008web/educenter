@@ -1,4 +1,4 @@
-const { getTeachers, postTeachers, updateTeachers } = require("../controllers/teachers/teachers.controller")
+const { getTeachers, postTeachers, updateTeachers, deleteTeachers } = require("../controllers/teachers/teachers.controller")
 const { protect } = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
 
@@ -170,5 +170,8 @@ router.post("/post", protect, upload.single("imgUrl"), postTeachers)
  *         description: Server xatosi
  */
 router.patch("/update", protect, upload.single("imgUrl"), updateTeachers)
+
+
+router.delete("/delete/:id", protect, deleteTeachers)
 
 module.exports = router

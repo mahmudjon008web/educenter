@@ -79,8 +79,25 @@ const logout = async (req, res) => {
   }
 }
 
+const deleteAdmin = async (req, res)=>{
+  try {
+    const {id} = req.params
+    const existAdmin = await User.findOne({where: {id}})
+    if(!existAdmin){
+      ValidError(res, 300, "Ma'lumot topilmadi!!!")
+    }
+    await User.destroy({where: {id: existAdmin.id}})
+    res.status(201).json({
+      message: "Muvaffaqiyatli o'chirildi!"
+    })
+  } catch (error) {
+    ServerError(res, error)
+  }
+}
+
 module.exports = {
     registerAdmin,
     login,
-    logout
+    logout,
+    deleteAdmin
 }

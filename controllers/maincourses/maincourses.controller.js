@@ -43,8 +43,25 @@ const updateMaincourses = async (req, res)=>{
     }
 }
 
+const deleteMainCourses = async (req, res)=>{
+    try {
+        const {id}=req.params
+        const existMainCourses = await Courses.findOne({where: {id}})
+        if(!existMainCourses){
+            ValidError(res, 300, "Ma'lumot topilmadi")
+        }
+        await db.Teachers.destroy({where: {id: existMainCourses.id}})
+        res.status(201).json({
+            message: "Muvaffaqiyatli o'chirildi"
+        })
+    } catch (error) {
+        ServerError(res, error)
+    }
+}
+
 module.exports = {
     getMaincourses,
     postMaincourses,
-    updateMaincourses
+    updateMaincourses,
+    deleteMainCourses
 }

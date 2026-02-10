@@ -45,9 +45,26 @@ const updateTeachers = async (req, res)=>{
     }
 }
 
+const deleteTeachers = async (req, res)=>{
+    try {
+        const {id} = req.params
+        const existTeacher = await Teachers.findOne({where: {id}})
+        if(!existTeacher){
+            ValidError(res, 300, "Ma'lumot topilmadi!")
+        }
+        await Teachers.destroy({where: {id: existTeacher.id}})
+        res.status(201).json({
+            message: "Muvaffaqiyatli o'chirildi"
+        })
+    } catch (error) {
+        ServerError(res, error)
+    }
+}
+
 
 module.exports = {
     postTeachers,
     getTeachers,
-    updateTeachers
+    updateTeachers,
+    deleteTeachers
 }

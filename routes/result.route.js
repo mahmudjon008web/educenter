@@ -1,4 +1,4 @@
-const { getResult, postResult, updateResult } = require("../controllers/result/result.controller")
+const { getResult, postResult, updateResult, deleteResult } = require("../controllers/result/result.controller")
 const { protect } = require("../middleware/protected")
 
 const router = require("express").Router()
@@ -98,5 +98,7 @@ router.post("/post", protect, postResult)
  *         description: Server xatosi
  */
 router.patch("/update", protect, updateResult)
+
+router.delete("/delete/:id", protect, deleteResult)
 
 module.exports = router

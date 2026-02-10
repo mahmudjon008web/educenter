@@ -41,8 +41,25 @@ const updateResult = async (req, res)=>{
     }
 }
 
+const deleteResult = async (req, res)=>{
+    try {
+        const {id}=req.params
+        const existResult = await Result.findOne({where: {id}})
+        if(!existResult){
+            ValidError(res, 300, "Malumot topilmadi")
+        }
+        await Result.destroy({where: {id: existResult.id}})
+        res.status(201).json({
+            message: "Ma'lumotlar o'chirildi"
+        })
+    } catch (error) {
+        ServerError(res, error)
+    }
+}
+
 module.exports = {
     getResult,
     postResult,
-    updateResult
+    updateResult,
+    deleteResult
 }

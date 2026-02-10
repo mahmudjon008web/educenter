@@ -43,8 +43,27 @@ const updateSertificates = async (req, res)=>{
     }
 }
 
+
+const deleteSertificate = async (req, res)=>{
+    try {
+        const {id} = req.params
+        const existSertificate = await Sertificates.findOne({where: {id}})
+        if(!existSertificate){
+            ValidError(res, 300, "Ma'lumot topilmadi!")
+        }
+        await Sertificates.destroy({where: {id: existSertificate.id}})
+        res.status(201).json({
+            message: "Muvaffaqiyatli o'chirildi"
+        })
+    } catch (error) {
+        ServerError(res, error)
+    }
+}
+
+
 module.exports = {
     getSertificates,
     postSertificates,
-    updateSertificates
+    updateSertificates,
+    deleteSertificate
 }
