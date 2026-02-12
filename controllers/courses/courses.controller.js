@@ -62,5 +62,6 @@ const deleteCourses = async (req, res)=>{
 module.exports = {
     getAllcourses,
     postAllcourses,
-    updateAllcourses
+    updateAllcourses,
+    deleteCourses
 }
