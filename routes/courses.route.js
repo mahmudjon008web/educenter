@@ -1,7 +1,8 @@
 const router = require("express").Router()
-const { getAllcourses, postAllcourses, updateAllcourses } = require("../controllers/courses/courses.controller")
+const { getAllcourses, postAllcourses, updateAllcourses, deleteCourses } = require("../controllers/courses/courses.controller")
 const {protect} = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
+const uploadSingleImage = require("../utils/uploadSingleImage")
 
 /**
  * @swagger
@@ -124,5 +125,7 @@ router.post("/post", protect, upload.single("imgUrl"), postAllcourses)
  *         description: Server xatosi
  */
 router.patch("/update", protect, upload.single("imgUrl"), updateAllcourses)
+
+router.delete("/delete/:id", protect, deleteCourses)
 
 module.exports = router

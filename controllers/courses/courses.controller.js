@@ -43,6 +43,22 @@ const updateAllcourses = async (req, res)=>{
     }
 }
 
+const deleteCourses = async (req, res)=>{
+    try {
+        const {id} = req.params
+        const existCourses = await Courses.findOne({where: {id}})
+        if(!existCourses){
+            ValidError(res, 300, "Ma'lumot toplilmadi")
+        }
+        await Courses.destroy({where: {id: existCourses.id}})
+        res.status(201).json({
+            message: "Muvaffaqiyatli qo'shildi"
+        })
+    } catch (error) {
+        ServerError(res, error)
+    }
+}
+
 module.exports = {
     getAllcourses,
     postAllcourses,
