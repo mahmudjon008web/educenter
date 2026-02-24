@@ -2,7 +2,6 @@ const router = require("express").Router()
 const { getAllcourses, postAllcourses, updateAllcourses, deleteCourses } = require("../controllers/courses/courses.controller")
 const {protect} = require("../middleware/protected")
 const upload = require("../utils/fileUpload")
-const uploadSingleImage = require("../utils/uploadSingleImage")
 
 /**
  * @swagger
